@@ -1,8 +1,9 @@
 """
 Defines a basic CLI for exposing Searcher
 """
+import logging
+
 import fire
-from tqdm import tqdm
 
 from searcher import Searcher
 
@@ -25,13 +26,15 @@ def main(
     if query and query != "human":
         searcher.search(query, limit=limit, **kwargs)
     else:
+        logging.info("No query supplied, searching for Human RNA")
         searcher.search_human_rna(limit=limit)
 
     if download_all:
         assert searcher.cached, "Searcher is not cached."
 
-        print(f"Found {len(searcher)} results")
-        all(tqdm(searcher))
+        logging.info(f"Found {len(searcher)} results")
+        logging.info("Downloading all results")
+        searcher.download_all()
 
 
 if __name__ == "__main__":

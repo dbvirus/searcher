@@ -2,10 +2,12 @@
 Supplies the main Searcher service
 """
 from json import loads
+import logging
 
 from Bio import Entrez
 from mongoengine import connect, connection
 from pymongo.errors import ServerSelectionTimeoutError
+from tqdm import tqdm
 from xmltodict import parse
 
 from cacher.documents import SearchResult, EntrezItem
@@ -29,12 +31,15 @@ class Searcher:
 
         # The cached flag is set accordingly to the connectivity to a Mongodb
         if mongo_url:
+            logging.info("Trying to connect to Mongo cache...")
             try:
                 connect(host=mongo_url)
                 connection.get_connection().server_info()
             except ServerSelectionTimeoutError:
+                logging.warning("Mongo connection successful!")
                 self.cached = False
             else:
+                logging.info("Mongo connection successful!")
                 self.cached = True
         else:
             self.cached = False
@@ -84,6 +89,26 @@ class Searcher:
             data = loads(data.to_json())
 
         return data
+
+    def download_all(self, show_progress_bar=True):
+        """
+        download_all loops through all the results and downloads them
+        """
+        if not self.cached:
+            logging.error("Searcher is not cached. Halting download")
+            return
+
+        if not self._result:
+            logging.error("No query result available. Halting")
+            return
+
+        items = self._result["esearchresult"]["idlist"]
+
+        if show_progress_bar:
+            items = tqdm(items)
+
+        for item in items:
+            self.fetch(item)
 
     def __getitem__(self, key):
         """

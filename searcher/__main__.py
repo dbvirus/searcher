@@ -20,7 +20,7 @@ def main(
     """
     Given an e-mail and API key, searches for Human RNA and outputs the result
     """
-
+    logging.basicConfig(level=logging.INFO)
     searcher = Searcher(email, api_key=api_key, mongo_url=mongo_url)
 
     if query and query != "human":

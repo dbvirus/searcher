@@ -31,12 +31,12 @@ class Searcher:
 
         # The cached flag is set accordingly to the connectivity to a Mongodb
         if mongo_url:
-            logging.info("Trying to connect to Mongo cache...")
+            logging.info(f'Trying to connect to Mongo cache @ "{mongo_url}"...')
             try:
                 connect(host=mongo_url)
                 connection.get_connection().server_info()
             except ServerSelectionTimeoutError:
-                logging.warning("Mongo connection successful!")
+                logging.warning("Mongo connection failed!")
                 self.cached = False
             else:
                 logging.info("Mongo connection successful!")

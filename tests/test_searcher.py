@@ -6,7 +6,7 @@ and do not make any sort of HTTP request.
 import io
 from pathlib import Path
 from Bio import Entrez
-from searcher import Searcher
+from dbvirus_searcher import Searcher
 
 
 def test_searcher_initialization(searcher):

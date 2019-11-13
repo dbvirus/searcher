@@ -3,7 +3,7 @@ This module provides functional tests for the searcher module. Those tests
 do hit the NCBI databases and use live data acquired from those sources.
 """
 import jsonschema
-from searcher import Searcher
+from dbvirus_searcher import Searcher
 from .schemata import SEARCH_RESULT_SCHEMA
 
 

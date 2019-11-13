@@ -10,7 +10,7 @@ from pymongo.errors import ServerSelectionTimeoutError
 from tqdm import tqdm
 from xmltodict import parse
 
-from cacher.documents import SearchResult, EntrezItem
+from dbvirus_cacher.documents import SearchResult, EntrezItem
 
 
 class Searcher:

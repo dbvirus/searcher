@@ -21,4 +21,4 @@ RUN poetry config settings.virtualenvs.create false \
 
 COPY . /code
 
-ENTRYPOINT [ "python", "searcher" ]
+ENTRYPOINT [ "python", "dbvirus_searcher" ]

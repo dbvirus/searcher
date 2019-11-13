@@ -1,9 +1,10 @@
 [tool.poetry]
 name = "dbvirus-searcher"
 version = "0.1.0"
-description = ""
+description = "SRA data searcher w/ local caching for the DBVirus project"
 authors = ["Felipe Rodrigues <felipe@felipevr.com>"]
 license = "MIT"
+readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.7"
@@ -12,7 +13,7 @@ xmltodict = "^0.12"
 fire = "^0.2.1"
 pytz = "^2019.2"
 tqdm = "^4.36"
-cacher = {git = "https://github.com/dbvirus/cacher.git", branch = "master"}
+dbvirus-cacher = "^0.0.2"
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.3"
@@ -25,3 +26,7 @@ ipython = "^7.7"
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
+
+[tool.dephell.main]
+from = {format = "poetry", path = "pyproject.toml"}
+to = {format = "setuppy", path = "setup.py"}

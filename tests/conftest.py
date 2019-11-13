@@ -2,7 +2,7 @@
 Define a Searcher fixture to be used by the other tests
 """
 import pytest
-from searcher import Searcher
+from dbvirus_searcher import Searcher
 
 
 @pytest.fixture

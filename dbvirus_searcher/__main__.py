@@ -5,7 +5,8 @@ import logging
 
 import fire
 
-from dbvirus_searcher import Searcher
+# pylint: disable=import-error
+from searcher import Searcher
 
 # pylint: disable=too-many-arguments, bad-continuation
 def main(

@@ -1,6 +1,7 @@
 """
 Defines a basic CLI for exposing Searcher
 """
+import json
 import logging
 
 import fire
@@ -36,6 +37,9 @@ def main(
         logging.info(f"Found {len(searcher)} results")
         logging.info("Downloading all results")
         searcher.download_all()
+    else:
+        for result in searcher:
+            print(json.dumps(result, indent=4, sort_keys=True))
 
 
 if __name__ == "__main__":
